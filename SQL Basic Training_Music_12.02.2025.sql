@@ -1,5 +1,5 @@
 --Select * from Invoice where 1=0;
-/*
+
 --------------------------------------------------
 --CREATED By: Sara Nafaryeh
 --CREATED DATE: 12/01/2025
@@ -113,7 +113,7 @@ ORDER by
 	total aSC, BillingCity ASC
 
 
-*/
+
 
 -----------------------------------------------------------------------------------------------------
 -- Case Study 			GOAL: want as many customers as possible to spend between $7.00 and $15.00
@@ -142,15 +142,30 @@ FROM
 	Invoice
 ORDER BY
 	Purchase_Type
+*/	
+
+/*
+-----------------------------------------------
+-- Code Challenge: Categorize traks by price
+
+-- Purpose: White a SQL query that selects track names, composers, and unit prices, and categories each track based on its price
+--------------------------------------------
+
+SELECT
+	Name as [Track Name],
+	Composer,
+	UnitPrice as [Price],
 	
-
-
-
-
-
-
-
-
+	CASE
+		WHEN UnitPrice <= 0.99 then 'Budget'
+		WHEN UnitPrice BETWEEN 1.00 and 1.49 then 'Regular'
+		WHEN UnitPrice BETWEEN 1.50 and 1.99 THEN 'Premium'
+		else 'Excluseive'
+	end as PriceCategory
+FROM
+	Track
+order by
+    unitprice ASC;
 
 
 
