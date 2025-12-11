@@ -1,0 +1,39 @@
+/*
+Created by: Sara Nafaryeh
+Created Date: 12/11/2025
+Description: JOINS
+*/
+
+/*
+SELECT 
+	*
+FROM
+	Invoice 
+INNER JOIN
+	Customer
+on
+	Invoice.CustomerId = Customer.CustomerId
+*/
+
+-------------------------------------------
+--Aliase adding to make code less wordy
+---------------------------------------
+SELECT 
+	c.FirstName,
+	c.LastName,
+	c.CustomerId,
+	i.InvoiceId,
+	i.CustomerId,
+	i.InvoiceDate,
+	i.BillingAddress,
+	i.total
+FROM
+	Invoice as i
+full JOIN --INNER, LEFT, RIGHT, FULL; CROSS JOIN, UNION
+	Customer as c
+on
+	i.customerId = c.CustomerId
+--where i.CustomerId = '1' 
+order by 
+	i.CustomerId
+
