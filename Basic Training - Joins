@@ -1,8 +1,12 @@
+
 /*
-Created by: Sara Nafaryeh
-Created Date: 12/11/2025
-Description: JOINS
+--------------------------------------------------
+--CREATED By: Sara Nafaryeh
+--CREATED DATE: 12/22/2025
+--DESCRIPTION: This report we will be going over Joins
+--------------------------------------------------
 */
+
 
 /*
 SELECT 
@@ -15,6 +19,8 @@ on
 	Invoice.CustomerId = Customer.CustomerId
 */
 
+
+/*
 -------------------------------------------
 --Aliase adding to make code less wordy
 ---------------------------------------
@@ -36,4 +42,94 @@ on
 --where i.CustomerId = '1' 
 order by 
 	i.CustomerId
+
+*/
+
+
+/*
+Description: JOINS on more than two tables | What employees are responsible for the 10 heighest individual sales?
+
+
+SELECT
+	e.FirstName as Employee_First_Name,
+	e.LastName as Employee_Last_Name,
+	e.EmployeeId,
+	c.FirstName as Customer_First_Name,
+	c.LastName as Customer_Last_Name,
+	--c.SupportRepId as Employee_ID,
+	i.CustomerId,
+	i.total
+	
+from 
+	Invoice as i
+INNER join 
+	Customer as c
+on	
+	i.CustomerId = c.CustomerId
+inner JOIN
+	Employee as e
+on
+	c.SupportRepId  =e.EmployeeId
+order by
+	i.total DESC
+LIMIT
+	10
+
+*/
+
+
+/*
+Training, Code Challenge: Analyzing customer support interactions
+Description: write query to generate report that lists each customer along with their assigned support Report rep.
+*/
+
+SELECT
+	c.FirstName as CustomerFirstName,
+	c.LastName as CustomerLastName,
+	e.FirstName as SupportRepFirstName,
+	e.LastName as SupportRepLastName
+	
+FROM
+	customer as c
+INNER JOIN
+	Employee as e
+on 
+	c.SupportRepId = e.EmployeeId
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
