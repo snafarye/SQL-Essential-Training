@@ -1,0 +1,191 @@
+
+/*  Functions-------------------------------------------------------------------------------------------------------------------
+Created by: Sara Nafaryeh
+Created Date: 12/24/2025
+Description: Functions
+
+Concatenate: || linking things together in a chain or series
+
+
+
+SELECT
+	FirstName,
+	LastName,
+	Address,
+	FirstName ||' '|| LastName ||'; '|| Address ||'; '|| City ||', '|| State||' '|| PostalCode as Address
+FROM
+	Customer
+WHERE
+	Country = 'USA'
+
+*/
+
+
+-------------------------------------------------------------------
+/*Truncate-------------------------------------------------------------------------------------------------------------------
+Created by: Sara Nafaryeh
+Created Date: 12/24/2025
+Description: Create a mailing list of US customers , removing the additional numbers after dash in the zip code 
+Ex: 94040-111 to be just 94040
+
+Truncate: To shorten or reduce; fucntion length()
+
+
+
+
+SELECT
+	FirstName,
+	LastName,
+	Address,
+	FirstName ||' '|| LastName ||'; '|| Address ||'; '|| City ||', '|| State||' '|| PostalCode as [Mailing Address],
+    -- to understand how to place in length, need to test it OUTER
+	length(postalcode),  -- not same value, will need to add an additional code take a differant approch
+	substr(postalcode, 1,5) as [5 Digit Postal Code]
+FROM
+	Customer
+WHERE
+	Country = 'USA'
+
+*/
+
+
+-------------------------------------------------------------------
+/* Upper   lower-------------------------------------------------------------------------------------------------------------------
+Created by: Sara Nafaryeh
+Created Date: 12/24/2025
+Description: 
+
+Upper() function: Converts a string of text to uppercase
+lower() function: Converts a string of test to all lowercase
+
+
+
+SELECT
+	FirstName,
+	LastName,
+	Address,
+	FirstName ||' '|| LastName ||'; '|| Address ||'; '|| City ||', '|| State||' '|| PostalCode as [Mailing Address],
+    -- to understand how to place in length, need to test it OUTER
+	length(postalcode),  -- not same value, will need to add an additional code take a differant approch
+	substr(postalcode, 1,5) as [5 Digit Postal Code],
+	-- adding a new column with full caps
+	upper(firstname) as [FIRST NAME ALL CAPS],
+	lower(lastname) as [last name all lower]
+	
+FROM
+	Customer
+WHERE
+	Country = 'USA'
+
+*/
+
+-------------------------------------------------------------------
+
+
+/*-  DATE   ------------------------------------------------------------------------------------------------------------------
+Created by: Sara Nafaryeh
+Created Date: 12/24/2025
+Description: calculating the age of all employees
+
+DATE FUNCTIOND: allow the manipulation of data that is storeed in various date and time formats
+
+
+SELECT
+	e.FirstName,
+	e.LastName,
+	e.BirthDate,
+	strftime('%Y-%m-%d',BirthDate) as Birthdate_No_Timecode, --just pulls out the date not the time
+	strftime('%Y-%m-%d','now') - strftime('%Y-%m-%d',BirthDate) as Age
+FROM
+	Employee as e
+*/	
+
+-------------------------------------------------------------------
+
+
+/*--   Aggregate    -----------------------------------------------------------------------------------------------------------------
+Created by: Sara Nafaryeh
+Created Date: 12/24/2025
+Description: aggregate functions | what are our all time global sales?
+
+Aggregate() function: turns a range of number into a single point of DATA
+
+
+SELECT
+	sum(total) as Total_Sales,
+	avg(total) as Average_Sales,
+	max(total) as Max_Sales,
+	min(total) as Min_Sale,
+	count(*) as Count_Sales
+			
+FROM
+	Invoice as i
+*/
+
+-------------------------------------------------------------------
+
+
+
+/*   Nesting   --------------------------------------------------------------------------------------------
+Created by: Sara Nafaryeh
+Created Date: 12/24/2025
+Description: nesting functions
+
+Nesting function: a function contained within another function
+
+SELECT
+	sum(total) as Total_Sales,
+	
+	round(avg(total),2) as Average_Sales, --using round function nested into average to get better looking values
+	
+	max(total) as Max_Sales,
+	min(total) as Min_Sale,
+	count(*) as Count_Sales
+			
+FROM
+	Invoice as i
+*/
+
+
+
+-----------------------------------------
+/*
+SQL code challenge: customer postal code transformation
+write a query that selects the customers full name and transforms their postal code into a standardized 5-digit format
+
+*/
+
+SELECT
+	c.FirstName ||' '|| c.LastName as CustomerFullName,
+	--length(postalcode),  -- not same value, will need to add an additional code take a differant approch
+	substr(c.postalcode, 1,5) as [StandardizedPostalCode]
+FROM
+	Customer as c
+WHERE
+	Country = 'USA'
+order by 
+	CustomerFullName;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
